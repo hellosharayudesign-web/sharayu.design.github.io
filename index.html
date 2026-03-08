@@ -776,60 +776,33 @@
 
   
   <!-- SELECTED WORK -->
-  <section id="home-work" style="padding:130px 72px;">
-  <div class="section-header-anim" style="padding:0 72px;">
-    <div class="sha-eyebrow s-eyebrow">Selected Work</div>
-    <div class="sha-title-wrap"><span class="sha-title s-title">Recent <em>projects.</em></span></div>
-  </div>
-  <div class="work-grid">
-    <a class="work-card wc-1" onclick="goToCase('bloom')">
-      <div class="card-bg cb1">
-        <div class="cfl cfl1"></div><div class="cfl cfl2"></div>
-        <div class="card-sheen"></div>
-        <div class="card-chip">UI / UX</div>
-        <div class="card-icon">
-          <img src="https://i.ibb.co/QFLTkWVf/Hero-1.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-        </div>
-        <div class="card-hover-content">
-          <div class="ctag">Web App · Enterprise</div>
-          <div class="ctitle">Government Treasury Finance Platform Redesign</div>
-          <div class="ccta">View case study →</div>
-        </div>
-      </div>
-    
-    </a>
-    <a class="work-card wc-3" onclick="goToCase('prism')">
-      <div class="card-bg cb3">
-        <div class="cfl cfl1"></div><div class="cfl cfl2"></div>
-        <div class="card-sheen"></div>
-        <div class="card-chip">UI / UX</div>
-        <div class="card-icon">
-          <img src="https://i.ibb.co/9mWHRk64/Hero.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-        </div>
-        <div class="card-hover-content">
-          <div class="ctag">Mobile App · Banking</div>
-          <div class="ctitle">Designing MSME Banking at Scale</div>
-          <div class="ccta">View case study →</div>
-        </div>
-      </div>
-      </a>
-    <a class="work-card wc-2" onclick="goToCase('vera')">
-      <div class="card-bg cb2">
-        <div class="cfl cfl1"></div><div class="cfl cfl2"></div>
-        <div class="card-sheen"></div>
-        <div class="card-chip">UX Research</div>
-        <div class="card-icon">
-          <img src="https://i.ibb.co/3YMNZ8Dr/Research-H.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-        </div>
-        <div class="card-hover-content">
-          <div class="ctag">Enterprise · POS & Billing</div>
-          <div class="ctitle">Enhancing POS & Billing Experience for a Global Restaurant Corporation</div>
-          <div class="ccta">View case study →</div>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
+   /* ── WORK ── */
+  #home-work{padding:130px 72px;position:relative;z-index:1;}
+  .work-grid{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:18px;height:680px;}
+  .work-card{position:relative;border-radius:16px;overflow:hidden;opacity:0;transform:translateY(28px);transition:opacity 0.7s,transform 0.7s;transform-style:preserve-3d;cursor:pointer;}
+  .work-card.visible{opacity:1;transform:translateY(0);}
+  .wc-1{grid-column:1;grid-row:1;}.wc-2{grid-column:1;grid-row:2;}.wc-3{grid-column:2;grid-row:1/3;}
+  .card-bg{width:100%;height:100%;position:relative;overflow:hidden;}
+  .cb1{background:linear-gradient(135deg,#d6c8f8,#f5c6d2,#f8ddb6);}
+  .cb2{background:linear-gradient(135deg,#b0edda,#b2d8fc);}
+  .cb3{background:linear-gradient(160deg,#b4dcfc,#cfc0f7,#e3d0f8);}
+  .card-sheen{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse 65% 50% at 25% 25%,rgba(255,255,255,0.7) 0%,transparent 65%);transition:opacity 0.4s;}
+  .work-card:hover .card-sheen{opacity:0.5;}
+  .cfl{position:absolute;border-radius:50%;opacity:0.4;animation:cFloat 7s ease-in-out infinite;pointer-events:none;}
+  .cfl1{width:130px;height:130px;background:rgba(255,255,255,0.22);top:-30px;right:-30px;}
+  .cfl2{width:80px;height:80px;background:rgba(255,255,255,0.16);bottom:20px;left:16px;animation-delay:-3.5s;}
+  @keyframes cFloat{0%,100%{transform:translateY(0)scale(1);}50%{transform:translateY(-18px)scale(1.04);}}
+  .card-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+  .card-chip{position:absolute;top:16px;left:16px;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.7);border-radius:50px;padding:5px 14px;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);font-weight:500;transition:opacity 0.3s;}
+  .work-card:hover .card-chip{opacity:0;}
+  .card-hover-content{background:linear-gradient(180deg,transparent 0%,rgba(19,16,24,0.92) 100%);position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity 0.4s cubic-bezier(.25,.8,.25,1);}
+  .work-card:hover .card-hover-content{opacity:1;}
+  .ctag{font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px;transform:translateY(10px);transition:transform 0.4s cubic-bezier(.25,.8,.25,1);}
+  .ctitle{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:#fff;line-height:1.2;transform:translateY(10px);transition:transform 0.4s 0.05s cubic-bezier(.25,.8,.25,1);}
+  .ccta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:0.76rem;color:rgba(255,255,255,0.6);transform:translateY(10px);transition:transform 0.4s 0.1s cubic-bezier(.25,.8,.25,1),color 0.3s;}
+  .work-card:hover .ctag,.work-card:hover .ctitle,.work-card:hover .ccta{transform:translateY(0);}
+  .work-card:hover .ccta{color:#fff;}
+
   
   <!-- MY PROCESS -->
   <section id="home-process">
