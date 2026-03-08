@@ -606,20 +606,6 @@
   <!-- ══ HOME ══ -->
 <div class="page active" id="page-home">
  
-Here's your replacement hero section. Key changes made:
-
-"Available for work" → "Hi, I am Sharayu" (with the same dot animation)
-Headline split as: Designing experiences / that create impact. with the highlight underline on "impact."
-"See process" button → "Get in touch" with arrow, pointing to goTo('contact')
-All floating chips and metrics card use your existing CSS variables (--lavender, --rose, --mint, --peach, --muted, --dark, etc.) so they'll match your site's colour palette perfectly
-Just find the existing <section id="hero" ...> block in your index file and replace the whole thing with this. Everything else in the file stays untouched.
-
-
-
-
-
-
-Claude is AI and can make mistakes. Please double-check responses.
 <section id="hero" style="
   height: auto;
   min-height: 100vh;
@@ -633,17 +619,14 @@ Claude is AI and can make mistakes. Please double-check responses.
   overflow: visible;
 ">
 
-  <!-- LEFT: Text -->
   <div style="display:flex;flex-direction:column;gap:32px;">
 
-    <!-- Eyebrow -->
     <div style="display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.8s ease forwards 0.2s;">
       <div style="width:32px;height:1px;background:var(--muted);"></div>
       <span style="font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">Hi, I am Sharayu</span>
       <span style="width:6px;height:6px;background:#9de0b6;border-radius:50%;animation:availPulse 2.5s ease-in-out infinite;"></span>
     </div>
 
-    <!-- Headline -->
     <h1 style="
       font-family:'Cormorant Garamond',serif;
       font-size:clamp(44px,5.5vw,80px);
@@ -669,7 +652,6 @@ Claude is AI and can make mistakes. Please double-check responses.
       </span>
     </h1>
 
-    <!-- Subtext -->
     <p style="
       font-size:0.98rem;font-weight:300;line-height:1.85;
       color:var(--muted);max-width:420px;
@@ -679,7 +661,6 @@ Claude is AI and can make mistakes. Please double-check responses.
       I turn complex enterprise systems into intuitive digital experiences that drive measurable impact.
     </p>
 
-    <!-- CTAs -->
     <div style="display:flex;align-items:center;gap:20px;opacity:0;animation:fadeUp 0.9s ease forwards 0.85s;">
       <button class="btn-primary" onclick="goTo('work')" style="display:inline-flex;align-items:center;gap:10px;">
         View my work
@@ -695,25 +676,14 @@ Claude is AI and can make mistakes. Please double-check responses.
       </button>
     </div>
 
-    <!-- Social links -->
     <div style="display:flex;gap:16px;opacity:0;animation:fadeUp 0.9s ease forwards 1s;">
-      <a href="https://linkedin.com/in/sharayu-design" target="_blank" style="
-        width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-        border:1px solid var(--border);border-radius:50%;
-        color:var(--muted);text-decoration:none;transition:all 0.3s ease;
-        background:rgba(250,247,242,0.5);
-      ">
+      <a href="https://linkedin.com/in/sharayu-design" target="_blank" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;color:var(--muted);text-decoration:none;transition:all 0.3s ease;background:rgba(250,247,242,0.5);">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <rect x="1.5" y="1.5" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.2"/>
           <path d="M4.5 6V10M4.5 4.5V4.6M7 10V7.5c0-1 .5-1.5 1.5-1.5s1.5.5 1.5 1.5V10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
       </a>
-      <a href="mailto:hello.sharayu.design@gmail.com" style="
-        width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-        border:1px solid var(--border);border-radius:50%;
-        color:var(--muted);text-decoration:none;transition:all 0.3s ease;
-        background:rgba(250,247,242,0.5);
-      ">
+      <a href="mailto:hello.sharayu.design@gmail.com" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;color:var(--muted);text-decoration:none;transition:all 0.3s ease;background:rgba(250,247,242,0.5);">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <rect x="1.5" y="2.5" width="11" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
           <path d="M1.5 4.5l5.5 3.5 5.5-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
@@ -723,88 +693,33 @@ Claude is AI and can make mistakes. Please double-check responses.
 
   </div>
 
-  <!-- RIGHT: Portrait Card + Floating Elements -->
   <div style="position:relative;display:flex;align-items:center;justify-content:center;height:min(620px,80vh);">
 
-    <!-- Glow blob -->
-    <div style="
-      position:absolute;width:400px;height:400px;
-      background:radial-gradient(ellipse at center,rgba(207,192,247,0.35) 0%,rgba(245,194,206,0.25) 40%,transparent 75%);
-      border-radius:50%;filter:blur(50px);
-      animation:glowPulse 5s ease-in-out infinite;z-index:1;
-    "></div>
+    <div style="position:absolute;width:400px;height:400px;background:radial-gradient(ellipse at center,rgba(207,192,247,0.35) 0%,rgba(245,194,206,0.25) 40%,transparent 75%);border-radius:50%;filter:blur(50px);animation:glowPulse 5s ease-in-out infinite;z-index:1;"></div>
 
-    <!-- Photo card -->
-    <div id="portraitCard" style="
-      position:relative;z-index:10;
-      width:clamp(240px,22vw,310px);
-      border-radius:24px;overflow:hidden;
-      background:linear-gradient(135deg,var(--lavender),var(--rose),var(--peach));
-      box-shadow:0 2px 4px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.07),0 24px 64px rgba(0,0,0,0.1);
-      animation:hcardFloat 6s ease-in-out infinite;
-    ">
+    <div style="position:relative;z-index:10;width:clamp(240px,22vw,310px);border-radius:24px;overflow:hidden;background:linear-gradient(135deg,var(--lavender),var(--rose),var(--peach));box-shadow:0 2px 4px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.07),0 24px 64px rgba(0,0,0,0.1);animation:hcardFloat 6s ease-in-out infinite;">
       <div style="width:100%;aspect-ratio:3/4;overflow:hidden;position:relative;">
-        <img
-          src="https://i.ibb.co/Nd3SMNny/Chat-GPT-Image-Mar-1-2026-02-49-22-PM.png"
-          alt="Sharayu"
-          style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;"
-          onerror="this.style.display='none'"
-        />
+        <img src="https://i.ibb.co/Nd3SMNny/Chat-GPT-Image-Mar-1-2026-02-49-22-PM.png" alt="Sharayu" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" onerror="this.style.display='none'"/>
       </div>
       <div style="padding:16px 20px;background:rgba(255,255,255,0.75);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.9);">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--dark);letter-spacing:0.01em;">Sharayu Desai</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--dark);">Sharayu Desai</div>
         <div style="font-size:11px;color:var(--muted);font-weight:400;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;">UX / UI Designer</div>
       </div>
     </div>
 
-    <!-- Floating chip: User Research -->
-    <div style="
-      position:absolute;top:18%;left:-6%;
-      padding:8px 14px;border-radius:100px;font-size:11px;font-weight:500;
-      background:rgba(255,255,255,0.88);border:1px solid rgba(176,236,216,0.5);
-      color:var(--text);backdrop-filter:blur(12px);
-      box-shadow:0 2px 12px rgba(0,0,0,0.06);white-space:nowrap;
-      opacity:0;animation:hfloat3 6.5s ease-in-out infinite 0.5s,hfadeIn 0.6s ease forwards 1.7s;
-    ">
-      <span style="width:5px;height:5px;border-radius:50%;background:var(--mint);display:inline-block;margin-right:5px;vertical-align:middle;"></span>
-      User Research
+    <div style="position:absolute;top:18%;left:-6%;padding:8px 14px;border-radius:100px;font-size:11px;font-weight:500;background:rgba(255,255,255,0.88);border:1px solid rgba(176,236,216,0.5);color:var(--text);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,0.06);white-space:nowrap;opacity:0;animation:hfloat3 6.5s ease-in-out infinite 0.5s,hfadeIn 0.6s ease forwards 1.7s;">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--mint);display:inline-block;margin-right:5px;vertical-align:middle;"></span>User Research
     </div>
 
-    <!-- Floating chip: Design Systems -->
-    <div style="
-      position:absolute;bottom:28%;left:-4%;
-      padding:8px 14px;border-radius:100px;font-size:11px;font-weight:500;
-      background:rgba(255,255,255,0.88);border:1px solid rgba(207,192,247,0.5);
-      color:var(--text);backdrop-filter:blur(12px);
-      box-shadow:0 2px 12px rgba(0,0,0,0.06);white-space:nowrap;
-      opacity:0;animation:hfloat3 9s ease-in-out infinite 1.5s,hfadeIn 0.6s ease forwards 1.9s;
-    ">
-      <span style="width:5px;height:5px;border-radius:50%;background:var(--lavender);display:inline-block;margin-right:5px;vertical-align:middle;"></span>
-      Design Systems
+    <div style="position:absolute;bottom:28%;left:-4%;padding:8px 14px;border-radius:100px;font-size:11px;font-weight:500;background:rgba(255,255,255,0.88);border:1px solid rgba(207,192,247,0.5);color:var(--text);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,0.06);white-space:nowrap;opacity:0;animation:hfloat3 9s ease-in-out infinite 1.5s,hfadeIn 0.6s ease forwards 1.9s;">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--lavender);display:inline-block;margin-right:5px;vertical-align:middle;"></span>Design Systems
     </div>
 
-    <!-- Floating chip: Interaction Design -->
-    <div style="
-      position:absolute;top:10%;right:-4%;
-      padding:8px 14px;border-radius:100px;font-size:11px;font-weight:500;
-      background:rgba(255,255,255,0.88);border:1px solid rgba(245,194,206,0.5);
-      color:var(--text);backdrop-filter:blur(12px);
-      box-shadow:0 2px 12px rgba(0,0,0,0.06);white-space:nowrap;
-      opacity:0;animation:hfloat4 7.5s ease-in-out infinite,hfadeIn 0.6s ease forwards 2.1s;
-    ">
-      <span style="width:5px;height:5px;border-radius:50%;background:var(--peach);display:inline-block;margin-right:5px;vertical-align:middle;"></span>
-      Interaction Design
+    <div style="position:absolute;top:10%;right:-4%;padding:8px 14px;border-radius:100px;font-size:11px;font-weight:500;background:rgba(255,255,255,0.88);border:1px solid rgba(245,194,206,0.5);color:var(--text);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,0.06);white-space:nowrap;opacity:0;animation:hfloat4 7.5s ease-in-out infinite,hfadeIn 0.6s ease forwards 2.1s;">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--peach);display:inline-block;margin-right:5px;vertical-align:middle;"></span>Interaction Design
     </div>
 
-    <!-- Floating metrics card -->
-    <div style="
-      position:absolute;bottom:12%;right:-8%;
-      width:165px;
-      background:rgba(255,255,255,0.85);border:1px solid rgba(176,236,216,0.4);
-      border-radius:16px;padding:14px;backdrop-filter:blur(16px);
-      box-shadow:0 4px 24px rgba(0,0,0,0.07);
-      opacity:0;animation:hfloat2 8.5s ease-in-out infinite 1s,hfadeIn 0.6s ease forwards 1.5s;
-    ">
+    <div style="position:absolute;bottom:12%;right:-8%;width:165px;background:rgba(255,255,255,0.85);border:1px solid rgba(176,236,216,0.4);border-radius:16px;padding:14px;backdrop-filter:blur(16px);box-shadow:0 4px 24px rgba(0,0,0,0.07);opacity:0;animation:hfloat2 8.5s ease-in-out infinite 1s,hfadeIn 0.6s ease forwards 1.5s;">
       <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">At a Glance</div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <span style="font-size:10px;color:var(--muted);">Experience</span>
@@ -824,7 +739,6 @@ Claude is AI and can make mistakes. Please double-check responses.
 
   </div>
 
-  <!-- Keyframes -->
   <style>
     @keyframes hunderline { to { transform: scaleX(1); } }
     @keyframes hcardFloat {
@@ -849,16 +763,10 @@ Claude is AI and can make mistakes. Please double-check responses.
     }
     @keyframes hfadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes hbarFill { to { transform: scaleX(1); } }
-
     @media (max-width: 900px) {
-      #hero {
-        grid-template-columns: 1fr !important;
-        padding: 100px 6vw 60px !important;
-      }
+      #hero { grid-template-columns: 1fr !important; padding: 100px 6vw 60px !important; }
     }
   </style>
-
-</section>
 
 </section>
 
