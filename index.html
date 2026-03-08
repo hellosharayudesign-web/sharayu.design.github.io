@@ -603,6 +603,531 @@
 </nav>
 
 <!-- ══ HOME ══ -->
+<style>
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 80px 80px 100px;
+    gap: 60px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── FONTS (add to your <head> if not already there) ──
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  ── */
+
+  /* CSS Variables — merge into your existing :root if you have one */
+  .hero, .hero * {
+    --ivory: #f9f6f1;
+    --warm-white: #fdfaf6;
+    --blush: #f0e8df;
+    --sage: #c8d5c0;
+    --lavender: #dbd5ed;
+    --peach: #f5d9c8;
+    --slate: #3d4147;
+    --mid: #6b717c;
+    --accent: #b8a99a;
+    --deep: #2a2d33;
+  }
+
+  /* LEFT */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    will-change: transform;
+  }
+
+  .hero .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: hfadeUp 0.8s ease forwards 0.2s;
+  }
+  .hero .eyebrow-line { width: 32px; height: 1px; background: var(--accent); }
+  .hero .eyebrow-text {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+  }
+  .hero .status-dot {
+    width: 6px; height: 6px; background: #7cba8a;
+    border-radius: 50%; margin-left: 4px;
+    animation: hpulse 2.5s ease-in-out infinite;
+  }
+  @keyframes hpulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5.5vw, 80px);
+    font-weight: 300; line-height: 1.08;
+    color: var(--deep); letter-spacing: -0.02em;
+    opacity: 0;
+    animation: hfadeUp 1s ease forwards 0.4s;
+  }
+  .hero .headline em { font-style: italic; font-weight: 300; color: var(--accent); }
+  .hero .headline .word-impact { position: relative; display: inline-block; }
+  .hero .headline .word-impact::after {
+    content: '';
+    position: absolute; bottom: 4px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--peach), var(--lavender));
+    transform: scaleX(0); transform-origin: left;
+    animation: hunderline 0.8s ease forwards 1.4s;
+  }
+  @keyframes hunderline { to { transform: scaleX(1); } }
+
+  .hero .subtext {
+    font-size: 16px; font-weight: 300; line-height: 1.75;
+    color: var(--mid); max-width: 420px;
+    opacity: 0; animation: hfadeUp 0.9s ease forwards 0.65s;
+  }
+
+  .hero .cta-row {
+    display: flex; align-items: center; gap: 28px;
+    opacity: 0; animation: hfadeUp 0.9s ease forwards 0.85s;
+  }
+  .hero .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px; background: var(--deep); color: var(--ivory);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; border-radius: 100px;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    box-shadow: 0 4px 24px rgba(42,45,51,0.15);
+  }
+  .hero .btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 32px rgba(42,45,51,0.22); }
+  .hero .btn-primary svg { transition: transform 0.3s ease; }
+  .hero .btn-primary:hover svg { transform: translateX(3px); }
+
+  .hero .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px; color: var(--mid); font-size: 13px; font-weight: 400;
+    letter-spacing: 0.04em; text-decoration: none; border-radius: 100px;
+    border: 1px solid rgba(184,169,154,0.4);
+    transition: all 0.3s ease; background: rgba(253,250,246,0.6);
+  }
+  .hero .btn-ghost:hover {
+    border-color: var(--accent); color: var(--deep);
+    background: rgba(232,213,196,0.2); transform: translateY(-1px);
+  }
+
+  .hero .social-strip {
+    display: flex; gap: 20px;
+    opacity: 0; animation: hfadeUp 0.9s ease forwards 1s;
+  }
+  .hero .social-link {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(184,169,154,0.3); border-radius: 50%;
+    color: var(--mid); text-decoration: none;
+    transition: all 0.3s ease; background: rgba(253,250,246,0.5);
+  }
+  .hero .social-link:hover {
+    border-color: var(--accent); color: var(--deep);
+    transform: translateY(-2px); background: rgba(232,213,196,0.3);
+  }
+
+  /* RIGHT */
+  .hero-right {
+    position: relative; display: flex;
+    align-items: center; justify-content: center;
+    height: 620px; will-change: transform;
+  }
+
+  .hero .glow-blob {
+    position: absolute; width: 420px; height: 420px;
+    background: radial-gradient(ellipse at center,
+      rgba(232,213,196,0.7) 0%, rgba(219,213,237,0.5) 35%,
+      rgba(200,213,192,0.3) 60%, transparent 80%);
+    border-radius: 50%; filter: blur(40px);
+    animation: hglowPulse 5s ease-in-out infinite; z-index: 1;
+  }
+  @keyframes hglowPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.85; }
+    50% { transform: scale(1.08) rotate(3deg); opacity: 1; }
+  }
+
+  .hero .portrait-card {
+    position: relative; z-index: 10; width: 300px;
+    border-radius: 24px; overflow: hidden; background: var(--blush);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.07),
+      0 24px 64px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.8) inset;
+    animation: hcardFloat 6s ease-in-out infinite;
+    transition: transform 0.15s ease, box-shadow 0.3s ease;
+  }
+  @keyframes hcardFloat {
+    0%, 100% { transform: translateY(0px) rotate(-1deg); }
+    50% { transform: translateY(-14px) rotate(-0.5deg); }
+  }
+
+  .hero .portrait-svg-wrap {
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #f0e8df 0%, #e8ddd4 40%, #ddd5cc 100%);
+    display: flex; align-items: flex-end; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .hero .portrait-svg-wrap::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 60%;
+    background: radial-gradient(ellipse at 50% 30%, rgba(245,232,220,0.8) 0%, transparent 70%);
+  }
+  .hero .portrait-svg-wrap svg { width: 82%; height: auto; position: relative; z-index: 1; }
+
+  .hero .portrait-caption {
+    padding: 16px 20px; background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,0.9);
+  }
+  .hero .portrait-caption .name {
+    font-family: 'Cormorant Garamond', serif; font-size: 17px;
+    font-weight: 400; color: var(--deep); letter-spacing: 0.01em;
+  }
+  .hero .portrait-caption .role {
+    font-size: 11px; color: var(--mid); font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px;
+  }
+
+  /* FLOATING ELEMENTS */
+  .hero .float-el {
+    position: absolute; z-index: 20;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    transition: transform 0.15s ease;
+  }
+
+  .hero .el-wireframe {
+    top: 28px; left: -60px; width: 160px;
+    background: rgba(255,255,255,0.75); border: 1px solid rgba(184,169,154,0.3);
+    border-radius: 14px; padding: 14px; backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); opacity: 0;
+    animation: hfloat1 7s ease-in-out infinite, hfadeIn 0.6s ease forwards 1.2s;
+  }
+  @keyframes hfloat1 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+
+  .hero .wf-line {
+    height: 6px; border-radius: 3px; margin-bottom: 6px;
+    background: linear-gradient(90deg, rgba(184,169,154,0.4), rgba(219,213,237,0.5));
+  }
+  .hero .wf-line:last-child { margin-bottom: 0; }
+  .hero .wf-line.short { width: 55%; }
+  .hero .wf-line.med { width: 78%; }
+  .hero .wf-block {
+    height: 36px; border-radius: 6px; margin-bottom: 8px;
+    background: linear-gradient(135deg, rgba(232,213,196,0.5), rgba(219,213,237,0.4));
+    border: 1px dashed rgba(184,169,154,0.4);
+  }
+
+  .hero .el-dashboard {
+    bottom: 80px; right: -70px; width: 180px;
+    background: rgba(255,255,255,0.8); border: 1px solid rgba(200,213,192,0.4);
+    border-radius: 16px; padding: 14px; backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07); opacity: 0;
+    animation: hfloat2 8.5s ease-in-out infinite 1s, hfadeIn 0.6s ease forwards 1.5s;
+  }
+  @keyframes hfloat2 { 0%,100%{transform:translateY(0px) rotate(1deg)} 50%{transform:translateY(-12px) rotate(0.5deg)} }
+
+  .hero .dash-title {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--mid); margin-bottom: 10px;
+  }
+  .hero .dash-metric {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 8px;
+  }
+  .hero .dash-metric-label { font-size: 10px; color: var(--mid); }
+  .hero .dash-metric-val {
+    font-family: 'Cormorant Garamond', serif; font-size: 16px;
+    font-weight: 600; color: var(--deep);
+  }
+  .hero .dash-bar {
+    height: 3px; background: rgba(200,213,192,0.2);
+    border-radius: 2px; margin-bottom: 6px; overflow: hidden;
+  }
+  .hero .dash-bar-fill {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--sage), var(--lavender));
+    animation: hbarFill 3s ease forwards 2s;
+    transform-origin: left; transform: scaleX(0);
+  }
+  @keyframes hbarFill { to { transform: scaleX(1); } }
+
+  .hero .el-label {
+    padding: 8px 14px; border-radius: 100px; font-size: 11px;
+    font-weight: 500; letter-spacing: 0.04em; backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); white-space: nowrap; opacity: 0;
+  }
+  .hero .el-label-1 {
+    top: 130px; left: -80px;
+    background: rgba(255,255,255,0.85); border: 1px solid rgba(200,213,192,0.5); color: var(--slate);
+    animation: hfloat3 6.5s ease-in-out infinite 0.5s, hfadeIn 0.6s ease forwards 1.7s;
+  }
+  .hero .el-label-2 {
+    bottom: 190px; left: -60px;
+    background: rgba(255,255,255,0.85); border: 1px solid rgba(219,213,237,0.6); color: var(--slate);
+    animation: hfloat3 9s ease-in-out infinite 1.5s, hfadeIn 0.6s ease forwards 1.9s;
+  }
+  .hero .el-label-3 {
+    top: 60px; right: -55px;
+    background: rgba(255,255,255,0.85); border: 1px solid rgba(245,217,200,0.6); color: var(--slate);
+    animation: hfloat4 7.5s ease-in-out infinite, hfadeIn 0.6s ease forwards 2.1s;
+  }
+  @keyframes hfloat3 { 0%,100%{transform:translateY(0px) translateX(0px)} 50%{transform:translateY(-9px) translateX(3px)} }
+  @keyframes hfloat4 { 0%,100%{transform:translateY(0px) rotate(1.5deg)} 50%{transform:translateY(-11px) rotate(-0.5deg)} }
+
+  .hero .el-component {
+    top: -10px; right: -55px; width: 130px;
+    background: rgba(255,255,255,0.8); border: 1px solid rgba(184,169,154,0.25);
+    border-radius: 12px; padding: 12px; backdrop-filter: blur(12px);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05); opacity: 0;
+    animation: hfloat4 8s ease-in-out infinite 2s, hfadeIn 0.6s ease forwards 1.3s;
+  }
+  .hero .comp-row { display: flex; gap: 6px; margin-bottom: 6px; }
+  .hero .comp-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .hero .comp-dot.r { background: rgba(255,139,139,0.5); }
+  .hero .comp-dot.y { background: rgba(255,208,139,0.5); }
+  .hero .comp-dot.g { background: rgba(139,220,149,0.5); }
+  .hero .comp-btn {
+    width: 100%; height: 22px; border-radius: 6px; margin-top: 6px;
+    background: linear-gradient(90deg, rgba(42,45,51,0.85), rgba(107,113,124,0.7));
+  }
+  .hero .comp-field {
+    width: 100%; height: 14px; border-radius: 4px; margin-bottom: 4px;
+    background: rgba(200,213,192,0.2); border: 1px solid rgba(184,169,154,0.2);
+  }
+
+  .hero .el-flow-1 {
+    top: 48%; right: -80px; opacity: 0;
+    animation: hflowX 4s ease-in-out infinite 2.3s, hfadeIn 0.6s ease forwards 2.3s;
+  }
+  .hero .el-flow-2 {
+    bottom: 140px; left: -90px; opacity: 0;
+    animation: hflowY 5s ease-in-out infinite 1s, hfadeIn 0.6s ease forwards 2.5s;
+  }
+  @keyframes hflowX { 0%,100%{opacity:0.6;transform:translateX(0)} 50%{opacity:1;transform:translateX(5px)} }
+  @keyframes hflowY { 0%,100%{opacity:0.5;transform:translateY(0)} 50%{opacity:0.9;transform:translateY(-5px)} }
+
+  .hero .label-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    display: inline-block; margin-right: 5px; vertical-align: middle; margin-bottom: 1px;
+  }
+  .hero .dot-sage { background: var(--sage); }
+  .hero .dot-lav { background: #b8b0d4; }
+  .hero .dot-peach { background: #d4a98a; }
+
+  @keyframes hfadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes hfadeIn  { from{opacity:0} to{opacity:1} }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 60px 40px; gap: 60px; }
+    .hero-right { height: 500px; }
+  }
+</style>
+
+<section class="hero" id="hero">
+
+  <!-- LEFT: Text -->
+  <div class="hero-left" id="heroLeft">
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Available for work</span>
+      <span class="status-dot"></span>
+    </div>
+
+    <h1 class="headline">
+      Designing<br>
+      <em>experiences</em> that<br>
+      create <span class="word-impact">impact.</span>
+    </h1>
+
+    <p class="subtext">
+      I turn complex enterprise systems into intuitive digital experiences that drive measurable outcomes.
+    </p>
+
+    <div class="cta-row">
+      <a href="work.html" class="btn-primary">
+        View my work
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7H12M7.5 2.5L12 7L7.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="process.html" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        See process
+      </a>
+    </div>
+
+    <div class="social-strip">
+      <a class="social-link" href="https://dribbble.com/yourhandle" target="_blank" title="Dribbble">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M1.5 5.5C3.5 6 6 5.5 8 4M2.5 9C4.5 8.5 7.5 8.5 9.5 10M7 1.5C7.5 3.5 7.5 7 6.5 9.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://behance.net/yourhandle" target="_blank" title="Behance">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="1.5" y="3.5" width="5" height="7" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M6.5 6.5H1.5M9 5h3M9 9h3M8 7c0-1.1.9-2 2-2s2 .9 2 2v.5H8V7z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a class="social-link" href="https://linkedin.com/in/yourname" target="_blank" title="LinkedIn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="1.5" y="1.5" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M4.5 6V10M4.5 4.5V4.6M7 10V7.5c0-1 .5-1.5 1.5-1.5s1.5.5 1.5 1.5V10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- RIGHT: Portrait -->
+  <div class="hero-right" id="heroRight">
+    <div class="glow-blob"></div>
+
+    <div class="portrait-card" id="portraitCard">
+      <div class="portrait-svg-wrap">
+        <svg viewBox="0 0 220 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 310 Q20 250 35 230 Q55 210 70 205 L80 260 L140 260 L150 205 Q165 210 185 230 Q200 250 200 310Z" fill="url(#grad_body)"/>
+          <path d="M70 205 Q90 220 110 218 Q130 220 150 205 L145 185 Q110 200 75 185Z" fill="url(#grad_collar)"/>
+          <ellipse cx="110" cy="190" rx="16" ry="12" fill="#d4b89a"/>
+          <ellipse cx="110" cy="148" rx="42" ry="48" fill="url(#grad_face)"/>
+          <path d="M68 138 Q70 90 110 88 Q150 90 152 138 Q150 105 110 102 Q70 105 68 138Z" fill="#3d3028"/>
+          <path d="M68 138 Q64 125 68 110 Q72 96 80 90 Q95 84 110 84 Q125 84 140 90 Q148 96 152 110 Q156 125 152 138 Q148 108 110 106 Q72 108 68 138Z" fill="#4a3c32"/>
+          <ellipse cx="110" cy="86" rx="22" ry="10" fill="#3d3028"/>
+          <ellipse cx="110" cy="84" rx="16" ry="7" fill="#4a3c32"/>
+          <path d="M92 140 Q99 136 106 138" stroke="#5a4535" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M114 138 Q121 136 128 140" stroke="#5a4535" stroke-width="1.8" stroke-linecap="round"/>
+          <ellipse cx="99" cy="148" rx="7" ry="5" fill="#fff"/>
+          <ellipse cx="121" cy="148" rx="7" ry="5" fill="#fff"/>
+          <ellipse cx="99" cy="148" rx="4.5" ry="4" fill="#3d3028"/>
+          <ellipse cx="121" cy="148" rx="4.5" ry="4" fill="#3d3028"/>
+          <circle cx="100.5" cy="146.5" r="1.2" fill="#fff"/>
+          <circle cx="122.5" cy="146.5" r="1.2" fill="#fff"/>
+          <path d="M92 144 Q95 142 99 143" stroke="#3d3028" stroke-width="1" stroke-linecap="round"/>
+          <path d="M114 143 Q118 142 126 144" stroke="#3d3028" stroke-width="1" stroke-linecap="round"/>
+          <path d="M108 153 Q106 162 107 165 Q110 167 113 165 Q114 162 112 153" stroke="#c4986c" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M100 174 Q105 170 110 171 Q115 170 120 174" stroke="#c4785c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M100 174 Q105 178 110 177 Q115 178 120 174" stroke="#c4785c" stroke-width="1" fill="rgba(196,120,92,0.3)" stroke-linecap="round"/>
+          <ellipse cx="90" cy="160" rx="9" ry="5" fill="rgba(220,140,120,0.12)"/>
+          <ellipse cx="130" cy="160" rx="9" ry="5" fill="rgba(220,140,120,0.12)"/>
+          <circle cx="68" cy="158" r="3" fill="#c8ad8a" stroke="#a8906a" stroke-width="0.8"/>
+          <circle cx="152" cy="158" r="3" fill="#c8ad8a" stroke="#a8906a" stroke-width="0.8"/>
+          <path d="M35 255 Q30 290 28 310" stroke="url(#grad_body)" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <path d="M185 255 Q190 290 192 310" stroke="url(#grad_body)" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <defs>
+            <linearGradient id="grad_face" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e8c9a0"/>
+              <stop offset="100%" stop-color="#d4a870"/>
+            </linearGradient>
+            <linearGradient id="grad_body" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2d33"/>
+              <stop offset="100%" stop-color="#3d4147"/>
+            </linearGradient>
+            <linearGradient id="grad_collar" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f0ebe4"/>
+              <stop offset="100%" stop-color="#e0d8ce"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="portrait-caption">
+        <div class="name">Alexandra Chen</div>
+        <div class="role">Senior UX Designer</div>
+      </div>
+    </div>
+
+    <!-- Floating elements -->
+    <div class="float-el el-wireframe">
+      <div style="font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Wireframe</div>
+      <div class="wf-block"></div>
+      <div class="wf-line"></div>
+      <div class="wf-line short"></div>
+      <div class="wf-line med"></div>
+      <div class="wf-line short" style="width:40%"></div>
+    </div>
+
+    <div class="float-el el-dashboard">
+      <div class="dash-title">Design Metrics</div>
+      <div class="dash-metric"><span class="dash-metric-label">Satisfaction</span><span class="dash-metric-val">94%</span></div>
+      <div class="dash-bar"><div class="dash-bar-fill" style="width:94%"></div></div>
+      <div class="dash-metric"><span class="dash-metric-label">Conversion</span><span class="dash-metric-val">+38%</span></div>
+      <div class="dash-bar"><div class="dash-bar-fill" style="width:73%;animation-delay:2.3s"></div></div>
+      <div class="dash-metric"><span class="dash-metric-label">NPS Score</span><span class="dash-metric-val">72</span></div>
+      <div class="dash-bar"><div class="dash-bar-fill" style="width:82%;animation-delay:2.6s;background:linear-gradient(90deg,var(--lavender),var(--peach))"></div></div>
+    </div>
+
+    <div class="float-el el-label el-label-1"><span class="label-dot dot-sage"></span>User Research</div>
+    <div class="float-el el-label el-label-2"><span class="label-dot dot-lav"></span>Design Systems</div>
+    <div class="float-el el-label el-label-3"><span class="label-dot dot-peach"></span>Interaction Design</div>
+
+    <div class="float-el el-component">
+      <div class="comp-row"><div class="comp-dot r"></div><div class="comp-dot y"></div><div class="comp-dot g"></div></div>
+      <div class="comp-field"></div>
+      <div class="comp-field" style="width:70%"></div>
+      <div class="comp-btn"></div>
+    </div>
+
+    <div class="float-el el-flow-1">
+      <svg width="64" height="32" viewBox="0 0 64 32" fill="none">
+        <path d="M4 16 Q20 4 44 16 Q52 20 60 16" stroke="rgba(184,169,154,0.6)" stroke-width="1.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+        <path d="M54 10 L60 16 L54 22" stroke="rgba(184,169,154,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="4" cy="16" r="3" fill="rgba(200,213,192,0.6)"/>
+        <circle cx="60" cy="16" r="3" fill="rgba(219,213,237,0.6)"/>
+      </svg>
+    </div>
+    <div class="float-el el-flow-2">
+      <svg width="36" height="60" viewBox="0 0 36 60" fill="none">
+        <path d="M18 4 Q30 20 18 36 Q8 48 18 56" stroke="rgba(184,169,154,0.5)" stroke-width="1.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+        <path d="M12 50 L18 56 L24 50" stroke="rgba(184,169,154,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="18" cy="4" r="3" fill="rgba(245,217,200,0.6)"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Mouse parallax / depth effect
+  const heroSection = document.getElementById('hero');
+  const portraitCard = document.getElementById('portraitCard');
+  const floatEls = heroSection.querySelectorAll('.float-el');
+  const glowBlob = heroSection.querySelector('.glow-blob');
+
+  heroSection.addEventListener('mousemove', e => {
+    const rect = heroSection.getBoundingClientRect();
+    const dx = (e.clientX - (rect.left + rect.width / 2)) / rect.width;
+    const dy = (e.clientY - (rect.top + rect.height / 2)) / rect.height;
+
+    portraitCard.style.transform = `
+      perspective(800px)
+      rotateX(${dy * -12}deg)
+      rotateY(${dx * 14}deg)
+      translateY(${-14 * (0.5 + dy * 0.3)}px)
+    `;
+    const depths = [18, 28, 14, 22, 12, 10, 16, 20];
+    floatEls.forEach((el, i) => {
+      const d = depths[i % depths.length];
+      el.style.transform = `translate(${dx * -d}px, ${dy * -d}px)`;
+    });
+    glowBlob.style.transform = `translate(${dx * 30}px, ${dy * 24}px) scale(1.06)`;
+  });
+
+  heroSection.addEventListener('mouseleave', () => {
+    portraitCard.style.transform = '';
+    floatEls.forEach(el => el.style.transform = '');
+    glowBlob.style.transform = '';
+  });
+</script>
+  
+  <!-- ══ HOME ══ -->
 <div class="page active" id="page-home">
   <section id="hero">
     <div class="hero-inner">
